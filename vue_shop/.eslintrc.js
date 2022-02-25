@@ -16,6 +16,6 @@ module.exports = {
     //报错解决
     'quotes': 'off',
     'semi': 'off',
-    'comma-dangle': 'off'
+    'comma-dangle': 'off',
   }
 }

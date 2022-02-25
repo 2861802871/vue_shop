@@ -3,7 +3,10 @@
     <div class="login_box">
       <!-- 头像 -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="" />
+        <img
+          src="../assets/logo.png"
+          alt=""
+        />
       </div>
       <!-- 登录表单 -->
       <el-form
@@ -32,8 +35,14 @@
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
-          <el-button type="primary" @click="login">登录</el-button>
-          <el-button type="info" @click="resetLoginForm">重置</el-button>
+          <el-button
+            type="primary"
+            @click="login"
+          >登录</el-button>
+          <el-button
+            type="info"
+            @click="resetLoginForm"
+          >重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -65,7 +74,7 @@ export default {
   methods: {
     // 重置表单方法
     resetLoginForm() {
-      this.$refs.loginFormRef.resetFields();
+    this.$refs.loginFormRef.resetFields();
     },
 
     login() {
