@@ -3,46 +3,22 @@
     <div class="login_box">
       <!-- 头像 -->
       <div class="avatar_box">
-        <img
-          src="../assets/logo.png"
-          alt=""
-        />
+        <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 登录表单 -->
-      <el-form
-        ref="loginFormRef"
-        label-width="0px"
-        :rules="loginFormRules"
-        class="login_form"
-        :model="loginForm"
-      >
+      <el-form ref="loginFormRef" label-width="0px" :rules="loginFormRules" class="login_form" :model="loginForm">
         <!-- 账号 -->
         <el-form-item prop="username">
-          <el-input
-            prefix-icon="el-icon-user"
-            placeholder="请输入账号admin"
-            v-model="loginForm.username"
-          ></el-input>
+          <el-input prefix-icon="el-icon-user" placeholder="请输入账号admin" v-model="loginForm.username"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input
-            type="password"
-            prefix-icon="el-icon-lock"
-            placeholder="请输入密码123456"
-            v-model="loginForm.password"
-          ></el-input>
+          <el-input type="password" prefix-icon="el-icon-lock" placeholder="请输入密码123456" v-model="loginForm.password"></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
-          <el-button
-            type="primary"
-            @click="login"
-          >登录</el-button>
-          <el-button
-            type="info"
-            @click="resetLoginForm"
-          >重置</el-button>
+          <el-button type="primary" @click="login">登录</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,7 +27,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       // 登录数据绑定对象
       loginForm: {
@@ -73,11 +49,11 @@ export default {
   },
   methods: {
     // 重置表单方法
-    resetLoginForm() {
-    this.$refs.loginFormRef.resetFields();
+    resetLoginForm () {
+      this.$refs.loginFormRef.resetFields();
     },
 
-    login() {
+    login () {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return; //验证不通过
         const { data: res } = await this.$http.post("login", this.loginForm);
@@ -97,7 +73,7 @@ export default {
 <style lang='less' scoped>
 // 大盒子
 .login_contaier {
-  background: url("./bg.jpg");
+  background: url("./login_bg.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   background-color: rgb(143, 199, 245, 0.5);

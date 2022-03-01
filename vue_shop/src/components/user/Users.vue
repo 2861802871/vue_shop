@@ -43,7 +43,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="176px">
           <template slot-scope="scope">
             <!-- <template slot-scope="{}"> -->
             <!-- {{scope.rows.id}} -->
@@ -53,7 +53,7 @@
             <el-button type="danger" size="mini" icon="el-icon-delete" @click="DeleteUserByid(scope.row.id)"></el-button>
             <!-- 分配角色按钮 -->
             <el-tooltip class="item" effect="dark" :enterable="false" content="分配角色" placement="top-start">
-              <el-button type="warning" size="mini" icon="el-icon-setting"></el-button>
+              <el-button type="warning" size="mini" icon="el-icon-setting" @click="SetRoleDialog(scope.row)"></el-button>
             </el-tooltip>
 
           </template>
@@ -63,6 +63,7 @@
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfor.pagenum" :page-sizes="[1, 2,4, 5, 10,20,50]" :page-size="queryInfor.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </el-card>
+
     <!-- 添加用户对话框 -->
     <el-dialog title="添加用户" :visible.sync="AddDialogVisible" width="50%" @close="AddDialogClosed">
       <!-- 主体 -->
@@ -110,6 +111,24 @@
         <el-button type="primary" @click="EditUserInfo">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 分配角色区域 -->
+    <el-dialog title="分配角色" :visible.sync="SetRoleDialogVisible" width="50%" @close="SelectedRosleClose">
+      <div>
+        <p>用户名：{{UserInfo.username}}</p>
+        <p>用户名：{{UserInfo.role_name}}</p>
+        <!-- 分配角色选择框 -->
+        <p>分配角色：
+          <el-select v-model="SelectedRosleId" placeholder="请选择">
+            <el-option v-for="item in RolesList" :key="item.id" :label="item.roleName" :value="item.id">
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="SetRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="SetRole">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -120,7 +139,7 @@ export default {
       queryInfor: {
         query: '',
         pagenum: 1,
-        pagesize: 4,
+        pagesize: 10,
       },
       UserList: [],
       total: 0,
@@ -128,6 +147,14 @@ export default {
       AddDialogVisible: false,
       //修改用户信息Dialog显示与否
       EditDialogVisible: false,
+      // 分配角色 Dialog显示与否
+      SetRoleDialogVisible: false,
+      // 分配角色用户信息
+      UserInfo: {},
+      // 角色列表
+      RolesList: [],
+      // 已选择的角色id
+      SelectedRosleId: '',
       // 数据对象
       AddForm: {
         username: '',
@@ -266,6 +293,31 @@ export default {
         });
       });
     },
+    // 分配角色
+    async SetRoleDialog (UserInfo) {
+      this.SetRoleDialogVisible = true
+      this.UserInfo = UserInfo
+      console.log(this.UserInfo)
+      const { data: res } = await this.$http.get('roles')
+      if (res.meta.status !== 200) return this.$message.error('获取角色列表失败！')
+      this.RolesList = res.data
+      console.log(res);
+    },
+    async SetRole () {
+      if (!this.SelectedRosleId) return this.$message.error('请选择要绑定的角色')
+      console.log(this.SelectedRosleId);
+      const { data: res } = await this.$http.put(`users/${this.UserInfo.id}/role`, { rid: this.SelectedRosleId })
+      console.log(res);
+      if (res.meta.status !== 200) return this.$message.error('修改用户角色失败！')
+      this.$message.success('修改用户角色成功')
+      this.getUserList()
+      this.SetRoleDialogVisible = false
+    },
+    // 关闭dialog重置数据
+    SelectedRosleClose () {
+      this.SelectedRosleId = ''
+      this.UserInfo = {}
+    }
 
   }
 }
