@@ -7,6 +7,11 @@ import './assets/css/global.css'
 //导入字体图标样式
 // import './assets/fonts/iconfont.css'
 
+// 第三方树型表格插件
+import TreeTable from 'vue-table-with-tree-grid'
+// 全局注册
+Vue.component('tree-table', TreeTable)
+
 import axios from 'axios'
 // 将axios挂载到vue的原型对象上
 Vue.prototype.$http = axios
