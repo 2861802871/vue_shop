@@ -267,6 +267,7 @@ export default {
         })
         if (res.meta.status !== 200) return this.$message.error('修改失败')
         this.$message.success('修改成功')
+        this.GetRolesList()
         // 关闭对话框
         this.EditRooleDialogVisible = false
       })

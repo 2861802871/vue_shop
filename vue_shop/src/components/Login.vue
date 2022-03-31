@@ -76,7 +76,6 @@ export default {
   background: url("./login_bg.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
-  background-color: rgb(143, 199, 245, 0.5);
   height: 100%;
 }
 // 登录盒子

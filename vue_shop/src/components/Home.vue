@@ -73,7 +73,7 @@ export default {
     // 获取菜单栏数据列表
     async getMenueList () {
       const { data: res } = await this.$http.get("menus");
-      // console.log(res);
+      console.log(res);
       if (res.meta.status !== 200) return $message.error(res.meta.msg);
       this.menuList = res.data;
     },
@@ -81,7 +81,7 @@ export default {
     toggleCollapse () {
       this.isCollaps = !this.isCollaps
     },
-    // 保存path连接的激活状态
+    // 保存path链接的激活状态
     saveNavStatus (activePath) {
       window.sessionStorage.setItem("activePath", activePath)
       this.activePath = activePath
