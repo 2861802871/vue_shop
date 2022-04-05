@@ -145,8 +145,8 @@ export default {
       // this.$message.success('获取分类列表数据成功')
       this.CateList = res.data.result
       this.total = res.data.total
-      console.log(res);
-      console.log(this.total);
+      // console.log(res);
+      // console.log(this.total);
     },
     // 当调整每页显示多少条数据时触发
     handleSizeChange (NewSize) {

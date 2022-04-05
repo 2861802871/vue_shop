@@ -156,7 +156,6 @@ export default {
       if (res.meta.status !== 200) return this.$message.error('获取分类列表失败！')
       console.log(res);
       this.PrentCataList = res.data
-
     },
     // 级联选择器选择值发生变化时
     async handleChange () {
