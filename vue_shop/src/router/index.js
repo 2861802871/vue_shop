@@ -10,6 +10,7 @@ import GoodsList from '../components/goods/GoodsList.vue'
 import GoodsParams from '../components/goods/GoodsParams.vue'
 import GoodsCategories from '../components/goods/GoodsCategories.vue'
 import Add from '../components/goods/Add.vue'
+import Oders from '../components/oders/Oders.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,7 @@ const routes = [
       // 商品分类
       { path: '/categories', component: GoodsCategories },
       {path:'/goods/add',component:Add},
+      {path:'/orders',component:Oders},
     ]
   }
 ]

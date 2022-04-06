@@ -7,7 +7,7 @@
       <el-breadcrumb-item>商品列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <!-- 搜索框和添加按钮 -->
+      <!-- 搜索框和添加按钮 :gutter间隔-->
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input clearable placeholder="请输入内容" v-model="queryInfo.query" @keyup.enter.native="searchData" @clear="getAlllist">
