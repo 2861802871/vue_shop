@@ -15,23 +15,26 @@ Vue.component('tree-table', TreeTable)
 import axios from 'axios'
 // 将axios挂载到vue的原型对象上
 Vue.prototype.$http = axios
-// 设置axios请求根路径
 
-//导入nprogress
+
+// 导入nprogrees包
 import Nprogrees from 'nprogress'
 import 'nprogress/nprogress.css'
 
+// 在request拦截器中展示进度条Nprogrees.start()
+
+// 设置axios请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
-  //有请求展示进度条
+  // 展示页面加载进度条
   Nprogrees.start()
   return config
 })
-
-// 请求结束拦截器response
-axios.interceptors.response.use(config => {
+// 在response拦截器中展示进度条
+axios.interceptors.response.use(config=>{
+// 请求结隐藏页面加载进度条
   Nprogrees.done()
   return config
 })
